@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/teal_700"
+    tools:context=".Ui.SplashScreenActivity1">
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        app:lottie_fileName="data2.json"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="true"
+        app:lottie_speed="1.25"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="560dp"
+        android:fontFamily="@font/cinzel"
+        android:text="Premium Data collection of Renters  . "
+        android:textSize="20dp" />
+    <ImageButton
+        android:id="@+id/next2"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_gravity="end"
+        android:layout_marginTop="580dp"
+        android:backgroundTint="@color/black"
+        android:src="@android:drawable/ic_media_next"
+        android:text="Next"
+
+        />
+</FrameLayout>
