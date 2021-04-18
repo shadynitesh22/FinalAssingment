@@ -10,6 +10,10 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.Toast
 import com.example.finalassingment20.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 class SplashScreenActivity1 : AppCompatActivity() , SensorEventListener {
     private lateinit var sensorManager: SensorManager
@@ -18,12 +22,19 @@ class SplashScreenActivity1 : AppCompatActivity() , SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen1)
-        next=findViewById(R.id.next2)
+        CoroutineScope(Dispatchers.Main).launch {
+            delay(2000)
+            startActivity(
+                Intent(
+                    this@SplashScreenActivity1,
+                    SplashScreenActivity::class.java
+                )
+            )
+            finish()
+        }
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
 
-        next.setOnClickListener {
-        startActivity(Intent(this,SplashScreenActivity::class.java))
-        }
+
         if (!checkSensor())
             return
         else {
@@ -44,14 +55,12 @@ class SplashScreenActivity1 : AppCompatActivity() , SensorEventListener {
 
     override fun onSensorChanged(event: SensorEvent?) {
         val values = event!!.values[1]
-        if (values < 0)//left
-            startActivity(Intent(this,LogInActivity::class.java))
+        //if (values < 0)//left
+           // startActivity(Intent(this,LogInActivity::class.java))
 
 
         //right
-        else if (values > 0)
-            Toast.makeText(this@SplashScreenActivity1,"Turn right to skip animations",Toast.LENGTH_SHORT
-            ).show()
+      //  else if (values >0)
 
 
     }

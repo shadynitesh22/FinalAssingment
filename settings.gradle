@@ -1,2 +1,3 @@
+include ':app:gharbeti'
 include ':app'
 rootProject.name = "FinalAssingment2.0"

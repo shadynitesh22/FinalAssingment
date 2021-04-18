@@ -5,47 +5,152 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Ui.RegisterActivity">
-    <EditText
-        android:hint="First Name"
-        android:layout_margin="10dp"
-        android:id="@+id/etFname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:hint="Last Name"
-        android:layout_margin="10dp"
-        android:id="@+id/etLname"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <EditText
-        android:hint="Username"
-        android:layout_margin="10dp"
-        android:id="@+id/etUsername"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+    android:background="#DEFFF8"
+    android:layout_weight="1"
 
-    <EditText
+    tools:context=".Ui.RegisterActivity">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_weight="1"
+        android:fontFamily="@font/cinzel"
+        android:textColor="@color/black"
+        android:layout_width="300dp"
+        android:layout_height="60dp"
+        android:text="Register"
+
+        android:textSize="40sp"
+        android:layout_gravity="right"
+        />
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        app:srcCompat="@drawable/one"
+
+        />
+    <ImageView
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:id="@+id/userimg"
+        android:src="@drawable/no"
+        />
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:background="@color/white"
+            android:hint="Username"
+            android:layout_margin="5dp"
+            android:id="@+id/etUsername"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_weight="1"
+                android:textColor="@color/black"
+            android:inputType="textEmailAddress"
+            android:background="@color/white"
+            android:hint="Email"
+            android:layout_margin="5dp"
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:hint="Phone number"
+            android:background="@color/white"
+            android:id="@+id/etPhone"
+            android:inputType="number"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputEditText
+        android:layout_margin="5dp"
+        android:layout_weight="1"
         android:hint="Password"
-        android:layout_margin="10dp"
+        android:background="@color/white"
         android:id="@+id/etPassword"
         android:inputType="textPassword"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <EditText
-        android:hint="Confirm password"
-        android:layout_margin="10dp"
-        android:id="@+id/etConfirmPassword"
-        android:inputType="textPassword"
+        android:layout_height="50dp"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_weight="1"
+            android:layout_margin="5dp"
+            android:hint="Confirm password"
+            android:id="@+id/etConfirmPassword"
+            android:inputType="textPassword"
+            android:background="@color/white"
+
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Spinner
+        android:layout_margin="2dp"
+        android:layout_weight="1"
+        android:background="#B5D9D7"
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
+    <Button
+        android:layout_margin="2dp"
+        android:layout_weight="1"
+        android:text="Add User"
+        android:id="@+id/btnAddStudent"
+        android:layout_width="100dp"
+        android:background="@color/black"
+        android:textColor="@color/white"
+        android:layout_gravity="center"
+        android:fontFamily="@font/cinzel"
         android:layout_height="wrap_content"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_weight="1"
+        android:fontFamily="@font/cinzel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" Already have a account? Log in as an owner"/>
 
     <Button
-        android:text="Add User"
-        android:layout_margin="10dp"
-        android:id="@+id/btnAddStudent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_weight="1"
+        android:id="@+id/login"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/black"
+        android:fontFamily="@font/cinzel"
+        android:text="Log In"
+
+        android:textColor="@color/white" />
 
 </LinearLayout>

@@ -73,8 +73,8 @@ class AddPostActivity : AppCompatActivity() {
 
         val notification = NotificationCompat.Builder(this, notificationChannels.CHANNEL_1)
             .setSmallIcon(R.drawable.notification)
-            .setContentTitle("Login Notification")
-            .setContentText("You have now logged in ")
+            .setContentTitle("Post added Notification")
+            .setContentText("You have now added post ")
             .setColor(Color.BLUE)
             .build()
 
@@ -172,10 +172,10 @@ class AddPostActivity : AppCompatActivity() {
         var gender = ""
         when {
             rdoBuy.isChecked -> {
-                gender = "Female"
+                gender = "For Sale"
             }
             rdoRent.isChecked -> {
-                gender = "Male"
+                gender = "For Rent"
             }
 
         }
@@ -193,7 +193,7 @@ class AddPostActivity : AppCompatActivity() {
                     withContext(Dispatchers.Main) {
                         Toast.makeText(
                             this@AddPostActivity,
-                            "Add Student bhayo", Toast.LENGTH_SHORT
+                            "Post added ", Toast.LENGTH_SHORT
                         ).show()
                         showHighPriorityNotification()
                     }

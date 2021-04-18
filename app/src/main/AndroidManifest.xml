@@ -18,7 +18,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalAssingment20"
         android:usesCleartextTraffic="true">
-              <activity android:name=".Ui.SplashScreenActivity1">
+        <activity android:name=".Ui.EnquiryActivity"></activity>
+        <activity android:name=".Ui.UpdateProfileActivity" />
+        <activity android:name=".Ui.HomeActivity" />
+        <activity android:name=".Ui.SplashScreenActivity1">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +33,7 @@
         <activity android:name=".Ui.DashboardActivity" />
         <activity android:name=".Ui.RegisterActivity" />
         <activity android:name=".Ui.LogInActivity" />
-        <activity android:name=".Ui.SplashScreenActivity"></activity>
+        <activity android:name=".Ui.SplashScreenActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

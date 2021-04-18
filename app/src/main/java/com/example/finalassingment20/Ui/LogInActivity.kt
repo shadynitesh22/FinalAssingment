@@ -27,8 +27,11 @@ class LogInActivity : AppCompatActivity() ,SensorEventListener {
     private lateinit var etPassword: TextInputEditText
     private lateinit var tvRegister: TextView
     private lateinit var btnLogin: Button
+    private lateinit var spinner: Spinner
+    private var selectedI =""
     private lateinit var chkRememberMe: CheckBox
     private lateinit var sensorManager: SensorManager
+    private val category = arrayListOf("Owner", "Renter")
     private var sensor: Sensor? = null
     private val permissions = arrayOf(
         android.Manifest.permission.CAMERA,
@@ -38,7 +41,7 @@ class LogInActivity : AppCompatActivity() ,SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_log_in)
-        linearLayout=findViewById(R.id.linerlayout)
+        spinner = findViewById(R.id.spinner)
         etUsername = findViewById(R.id.etUsername)
         etPassword = findViewById(R.id.etPassword)
         btnLogin = findViewById(R.id.btnLogin)
@@ -57,12 +60,34 @@ class LogInActivity : AppCompatActivity() ,SensorEventListener {
             startActivity(Intent(this@LogInActivity, RegisterActivity::class.java))
         }
 
+
         if (!checkSensor())
             return
         else {
             sensor = sensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY)
             sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
         }
+
+        val adapter
+                = ArrayAdapter(this, android.R.layout.simple_list_item_1, category)
+        spinner.adapter=adapter
+        spinner.onItemSelectedListener =object : AdapterView.OnItemSelectedListener {
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
+                selectedI = parent?.getItemAtPosition(position).toString()
+                Toast.makeText(this@LogInActivity,"$selectedI",Toast.LENGTH_SHORT).show()
+
+
+            }
+
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
+
     }
     private fun checkSensor(): Boolean {
         var flag = true
@@ -99,19 +124,36 @@ class LogInActivity : AppCompatActivity() ,SensorEventListener {
     private fun login() {
         val username = etUsername.text.toString()
         val password = etPassword.text.toString()
+        val status= selectedI
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val repository = UserRepository()
-                val response = repository.loginUser(username, password)
+                val response = repository.loginUser(username, password,status)
                 if (response.success == true) {
                     ServiceBuilder.token = "Bearer " + response.token
-                    startActivity(
-                        Intent(
-                            this@LogInActivity,
-                            DashboardActivity::class.java
+                    if (status=="Owner") {
+                        startActivity(
+                            Intent(
+                                this@LogInActivity,
+                                DashboardActivity::class.java
+                            )
+
                         )
-                    )
+
+
                     finish()
+                    }else{
+                        if (status=="Renter"){
+                            startActivity(
+                                Intent(
+                                    this@LogInActivity,
+                                    HomeActivity::class.java
+                                )
+
+                            )
+
+                        }
+                    }
                 } else {
                     withContext(Dispatchers.Main) {
                         val snack =
@@ -141,22 +183,16 @@ class LogInActivity : AppCompatActivity() ,SensorEventListener {
     override fun onSensorChanged(event: SensorEvent?) {
         val values = event!!.values[0]
 
+
         if(values<=4)
             login()
             //testing level
-            //val username = etUsername.text.toString()
-            //val password = etPassword.text.toString()
-            //if (username=="nitu"||password=="pass")
-             //   startActivity(Intent(this@LogInActivity, DashboardActivity::class.java))
-           // }
+
 
 
 
         else
-            Toast.makeText(
-                    this@LogInActivity,
-                    "Sensor is too far to login", Toast.LENGTH_SHORT
-            ).show()
+            return;
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {

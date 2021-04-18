@@ -5,19 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/one"
-    android:id="@+id/linerlayout"
-    android:gravity="center"
-    tools:context=".Ui.LogInActivity">
+    android:background="#FFF6F6"
+     tools:context=".Ui.LogInActivity">
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/cinzel"
+        android:text="Ghar-Bethi "
+        android:textColor="#7B8D93"
+        android:textSize="26dp" />
 
     <ImageView
-
-        android:layout_width="178dp"
-        android:layout_height="166dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/abc_vector_test" />
+        android:layout_marginTop="10dp"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/one" />
 
     <com.google.android.material.textfield.TextInputLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -47,7 +57,12 @@
             android:inputType="textPassword"
             android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
-
+    <Spinner
+        android:background="#B5D9D7"
+        android:layout_margin="1dp"
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
     <CheckBox
         android:layout_margin="10dp"
         android:layout_gravity="left"
@@ -58,14 +73,16 @@
 
     <Button
         android:id="@+id/btnLogin"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:backgroundTint="@color/teal_700"
+        android:layout_gravity="center"
+        android:backgroundTint="#B5D9D7"
         android:text="Login"
+
         android:textColor="#FFFFFF" />
 
-    <TextView
+    <com.google.android.material.textview.MaterialTextView
         android:textSize="15sp"
         android:layout_margin="10dp"
         android:gravity="center"

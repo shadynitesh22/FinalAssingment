@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/one"
+
+    android:background="#FFF6F6"
     android:orientation="vertical"
     tools:context=".Ui.SplashScreenActivity">
     <com.airbnb.lottie.LottieAnimationView
@@ -23,16 +24,7 @@
         android:layout_gravity="end"
         android:layout_marginTop="560dp"
         android:text="Find Hassel Free Rent in the city  "
-        android:textSize="20dp" />
+        android:textSize="20sp" />
 
-    <ImageButton
-        android:id="@+id/next"
-        android:layout_width="100dp"
-        android:layout_height="50dp"
-        android:layout_gravity="end"
-        android:layout_marginTop="580dp"
-        android:backgroundTint="@color/teal_700"
-        android:src="@android:drawable/ic_media_next"
-        android:text="Next"
-        />
+
 </FrameLayout>
