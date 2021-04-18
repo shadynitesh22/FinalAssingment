@@ -7,7 +7,8 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.Toast
-import com.example.gharbeti.R
+import com.example.gharbeti.Api.ServiceBuilder
+import com.example.gharbeti.Repo.UserRepository
 import com.google.android.material.snackbar.Snackbar
 
 import kotlinx.coroutines.CoroutineScope
@@ -25,10 +26,10 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        email = findViewById(R.id.email)
+        email = findViewById(R.id.username)
         password = findViewById(R.id.password)
-        btnOSLogin = findViewById(R.id.btnOSlogin)
-        linearLayout = findViewById(R.id.linearlayoutos)
+        btnOSLogin = findViewById(R.id.login)
+
 
         btnOSLogin.setOnClickListener {
             login()
@@ -40,7 +41,7 @@ class LoginActivity : AppCompatActivity() {
         val password = password.text.toString()
         CoroutineScope(Dispatchers.IO).launch {
             try {
-                val repository = UserRepo()
+                val repository = UserRepository()
                 val response = repository.loginUser(email, password)
                 if (response.success == true) {
                     val id = response.data?._id

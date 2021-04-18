@@ -206,7 +206,7 @@ class AddPostActivity : AppCompatActivity() {
                     ).show()
                 }
             }
-
+            clearform()
         }
 
     }
@@ -243,4 +243,11 @@ class AddPostActivity : AppCompatActivity() {
 
         }
     }
+    private fun clearform(){
+
+        etFullName.setText("")
+        etLocation.setText("")
+        etPrice.setText("")
+    }
+
 }

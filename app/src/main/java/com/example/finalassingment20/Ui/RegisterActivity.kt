@@ -139,12 +139,10 @@ class RegisterActivity : AppCompatActivity(), SensorEventListener {
                                     this@RegisterActivity,
                                     "User Registered", Toast.LENGTH_SHORT
                             ).show()
-                            etEmail.setText("")
-                            etPhone.setText("")
-                            etUsername.setText("")
-                            etPassword.setText("")
-                            etConfirmPassword.setText("")
+
+
                         }
+                        clearform()
                     }
                 } catch (ex: Exception) {
                     withContext(Dispatchers.Main) {
@@ -281,6 +279,13 @@ class RegisterActivity : AppCompatActivity(), SensorEventListener {
             e.printStackTrace()
             file // it will return null
         }
+    }
+    private fun clearform(){
+        etEmail.setText("")
+        etPhone.setText("")
+        etUsername.setText("")
+        etPassword.setText("")
+        etConfirmPassword.setText("")
     }
 
 

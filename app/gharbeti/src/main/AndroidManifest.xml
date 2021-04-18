@@ -8,6 +8,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FinalAssingment20" />
+        android:theme="@style/Theme.FinalAssingment20">
+        <activity android:name=".MainActivity"></activity>
+    </application>
 
 </manifest>
