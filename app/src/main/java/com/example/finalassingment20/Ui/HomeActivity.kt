@@ -1,11 +1,17 @@
 package com.example.finalassingment20.Ui
 
+import android.content.Context
 import android.content.Intent
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -22,14 +28,22 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import kotlin.math.sqrt
+import java.util.*
+import kotlin.collections.ArrayList
 
-class HomeActivity : AppCompatActivity() {
-
+class HomeActivity : AppCompatActivity(),SensorEventListener {
+    private lateinit var tvLight: TextView
+    private lateinit var sensorManager: SensorManager
     private lateinit var profile:ImageButton
     private lateinit var enquiry:ImageButton
     private lateinit var addtocart:ImageButton
     private lateinit var recyclerView: RecyclerView
     private lateinit var userimg:ImageView
+    private var sensor: Sensor? = null
+    private var acceleration = 0f
+    private var currentAcceleration = 0f
+    private var lastAcceleration = 0f
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home2)
@@ -52,14 +66,45 @@ class HomeActivity : AppCompatActivity() {
 
         loadStudents()
         addtocart.setOnClickListener {
-          //  val intent = Intent(this@HomeActivity, EnquiryActivity::class.java)
-            //var bundle = Bundle()
-           // bundle.putParcelable("item", )
-            //intent.putExtra("myBundle", bundle)
-           // Toast.makeText(context, "${item.itemName} added to Cart!!", Toast.LENGTH_SHORT).show()
-            //context.startActivity(intent)
+            startActivity(
+                    Intent(
+                            this@HomeActivity,
+                            EnquiryActivity::class.java
+                    )
+
+            )
+
+            Toast.makeText(this@HomeActivity, "added to Cart!!", Toast.LENGTH_SHORT).show()
+
         }
 
+        tvLight = findViewById(R.id.lightText)
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+
+        if (!checkSensor())
+            return
+        else {
+            sensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+
+
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        Objects.requireNonNull(sensorManager)!!.registerListener(sensorListener, sensorManager!!
+                .getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL)
+        acceleration = 10f
+        currentAcceleration = SensorManager.GRAVITY_EARTH
+        lastAcceleration = SensorManager.GRAVITY_EARTH
+
+    }
+
+    private fun checkSensor(): Boolean {
+        var flag = true
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT) == null) {
+            flag = false
+        }
+        return flag
     }
 
     private fun loadStudents() {
@@ -109,5 +154,50 @@ class HomeActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+    private val sensorListener: SensorEventListener = object : SensorEventListener {
+        override fun onSensorChanged(event: SensorEvent) {
+            val x = event.values[0]
+            val y = event.values[1]
+            val z = event.values[2]
+            lastAcceleration = currentAcceleration
+            currentAcceleration = sqrt((x * x + y * y + z * z).toDouble()).toFloat()
+            val delta: Float = currentAcceleration - lastAcceleration
+            acceleration = acceleration * 0.9f + delta
+            if (acceleration > 12) {
+                Toast.makeText(applicationContext, "Shake event detected", Toast.LENGTH_SHORT).show()
+                startActivity(
+                        Intent(
+                                this@HomeActivity,
+                                UpdateProfileActivity::class.java
+                        )
+
+                )
+            }
+
+        }
+        override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
+    }
+    override fun onResume() {
+        sensorManager?.registerListener(sensorListener, sensorManager!!.getDefaultSensor(
+                Sensor .TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_GAME
+        )
+        super.onResume()
+    }
+    override fun onPause() {
+        sensorManager!!.unregisterListener(sensorListener)
+        super.onPause()
+    }
+
+    override fun onSensorChanged(event: SensorEvent?) {
+        val values = event!!.values[0]
+        tvLight.text = values.toString()
+
+
+
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+
     }
 }

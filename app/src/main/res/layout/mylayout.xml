@@ -27,26 +27,26 @@
         <ImageButton
             android:backgroundTint="@color/material_on_surface_stroke"
             app:srcCompat="@drawable/ic_heart"
-            android:id="@+id/postadd"
+            android:id="@+id/heart"
             android:layout_width="50dp"
             android:layout_height="38dp"
             android:layout_marginTop="145dp"
             android:layout_marginLeft="195dp"
 
             />
-        <com.airbnb.lottie.LottieAnimationView
+       <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:lottie_fileName="like.json"
-            app:lottie_loop="true"
-            app:lottie_autoPlay="true"
-            app:lottie_speed="1.25"
+           app:lottie_autoPlay="false"
+
 
             />
-        <ImageView
 
-            android:id="@+id/postimgs"
+        <ImageView
+            android:id="@+id/photopost"
+
             android:layout_width="250dp"
             android:layout_height="140dp"
             android:layout_marginTop="45dp"
@@ -97,7 +97,7 @@
             android:id="@+id/postrating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rating:"
+            android:text="Likes:"
             android:textSize="16sp"
             android:layout_marginTop="230dp"
             android:fontFamily="@font/cinzel"

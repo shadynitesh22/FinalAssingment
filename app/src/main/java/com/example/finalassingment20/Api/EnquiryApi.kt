@@ -9,18 +9,18 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface EnquiryApi {
-    @POST("/add/cart")
+    @POST("cart/add/cart")
     suspend fun addItemToCart(
             @Header("Authorization") token: String,
             @Body enquiry: Enquiry
     ): Response<AddEnquiryResponse>
 
-    @GET("/cart/all")
+    @GET("cart/cart/all")
     suspend fun getCartItems(
             @Header("Authorization") token: String,
     ): Response<GetEnquiryResponse>
 
-    @DELETE("/delete/{id}")
+    @DELETE("cart/delete/{id}")
     suspend fun deleteCartItem(
             @Header("Authorization") token: String,
             @Path("id") id: String

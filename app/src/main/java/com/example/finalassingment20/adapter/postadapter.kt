@@ -7,8 +7,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.example.finalassingment20.Api.ServiceBuilder
 import com.example.finalassingment20.R
@@ -18,10 +20,7 @@ import com.example.finalassingment20.Ui.EnquiryActivity
 import com.example.finalassingment20.entity.Enquiry
 import com.example.finalassingment20.entity.Post
 import de.hdodenhof.circleimageview.CircleImageView
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class postadapter (
         private val lstStudents:ArrayList<Post>,
@@ -31,13 +30,15 @@ class postadapter (
     class StudentViewHolder (view:View): RecyclerView.ViewHolder(view) {
         val btnenquiry:Button=view.findViewById(R.id.enquiry)
         val btnDelete: ImageButton = view.findViewById(R.id.postdel)
-        val imgProfile: ImageView = view.findViewById(R.id.postimg)
+        val imgProfile: ImageView = view.findViewById(R.id.photopost)
         val tvName: TextView = view.findViewById(R.id.postname)
         val tvAge: TextView = view.findViewById(R.id.postprice)
         val tvAddress: TextView = view.findViewById(R.id.postlocation)
         val tvGender: TextView = view.findViewById(R.id.postlikes)
-        val btnview:Button=view.findViewById(R.id.viewmore)
-        val btnimg:Button=view.findViewById(R.id.postimgs)
+        val tvrating: TextView = view.findViewById(R.id.postrating)
+      //  val btnview:ImageButton=view.findViewById(R.id.viewmore)
+        val btnimg:ImageButton=view.findViewById(R.id.heart)
+        val like:LottieAnimationView=view.findViewById(R.id.animationView)
 
     }
 
@@ -52,6 +53,7 @@ class postadapter (
         holder.tvAge.text = student.PostLocation
         holder.tvAddress.text = student.PostPrice
         holder.tvGender.text = student.PostStatus
+
         val imagePath = ServiceBuilder.loadImagePath() + student.photo
         if (!student.photo.equals("no-photo.jpg")) {
             Glide.with(context)
@@ -60,6 +62,8 @@ class postadapter (
                     .into(holder.imgProfile)
         }
         holder.btnimg.setOnClickListener {
+        holder.like.playAnimation()
+        holder.tvrating.setText("Liked")
 
         }
             holder.btnenquiry.setOnClickListener {
